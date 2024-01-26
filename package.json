@@ -1,12 +1,15 @@
 {
   "private": true,
   "scripts": {
+    "prepare": "panda codegen",
     "build": "next build",
     "dev": "next dev",
     "start": "next start"
   },
   "dependencies": {
+    "@pandacss/dev": "^0.28.0",
     "date-fns": "^2.29.3",
+    "firebase": "^10.5.0",
     "gray-matter": "^4.0.3",
     "next": "latest",
     "react": "18.2.0",

@@ -1,75 +1,164 @@
-import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
-import utilStyles from '../styles/utils.module.css';
-import { getSortedPostsData } from '../lib/posts';
-import Link from 'next/link';
-import Date from '../components/date';
+import Link from "next/link";
+import Layout from "../components/layout";
+import { MealCard } from "../components/meal";
+import { HeadingSmall, Paragraph } from "../components/text";
+import { css } from "../styled-system/css";
 
-export default function Home({ allPostsData }) {
+const Recommendations = ({ recommendations }) => {
+  return (
+    <div
+      className={css({
+        display: "flex",
+        justifyContent: "flex-start",
+        gap: "5",
+        width: "100vw",
+        overflow: "scroll",
+      })}
+    >
+      {recommendations.map((recommendation) => (
+        <MealCard meal={recommendation.meal} />
+      ))}
+    </div>
+  );
+};
+
+export const AppBanner = () => {
+  return (
+    <>
+      <div
+        className={css({
+          borderTop: "1px solid grey",
+          borderBottom: "1px solid grey",
+          marginTop: "1.5em",
+          marginTop: "1.5em",
+          padding: "10px",
+        })}
+      >
+        <HeadingSmall>Download de app hier!</HeadingSmall>
+        <Link href="https://apps.apple.com/nl/app/recepai/id6463718463">
+          <div
+            className={css({
+              display: "flex",
+              justifyContent: "flex-start",
+              gap: "5",
+              maxWidth: "80vw",
+              marginTop: "0.5em",
+              marginBottom: "0.5em",
+              marginLeft: "0.5em",
+            })}
+          >
+            <img
+              className={css({
+                maxWidth: "120px",
+              })}
+              src="/images/recepai.png"
+            ></img>
+            <div>
+              <HeadingSmall>RecepAi</HeadingSmall>
+              <p className={css({ fontSize: "lg" })}>
+                Jouw week onze maaltijden
+              </p>
+            </div>
+          </div>
+          <p
+            className={css({
+              fontSize: "lg",
+              marginLeft: "0.5em",
+              color: "blue.600",
+            })}
+          >
+            Naar de app store
+          </p>
+        </Link>
+      </div>
+    </>
+  );
+};
+
+const AppVideo = () => {
+  <video
+    autoplay
+    controls
+    muted
+    autoPlay={true}
+    className={css({
+      maxWidth: "400px",
+    })}
+  >
+    <source src="/images/ingredients_recognizing.mp4" type="video/mp4" />
+  </video>;
+};
+export default function Page(props) {
   return (
     <Layout home>
-      <Head>
-        <title>Recepai - privacy notice</title>
-      </Head>
-      <section className={utilStyles.headingMd}>
-      <h1>Privacybeleid RecepAi-app</h1>
-<p>
-Dit privacybeleid beschrijft hoe RecepAi ("wij", "ons" of "onze") informatie verzamelt, gebruikt en deelt wanneer je onze app ("App") gebruikt. Door de App te gebruiken, stem je in met de voorwaarden in dit privacybeleid.
-</p>
-<h2>Informatie die we verzamelen</h2>
-<p>
-We verzamelen de volgende soorten informatie wanneer je onze App gebruikt:
+      <h1
+        className={css({
+          fontSize: "3xl",
+          fontWeight: "bold",
+          lineHeight: "tight",
+          marginTop: "0.5em",
+        })}
+      >
+        RecepAi, jouw Persoonlijke Chef met Kunstmatige Intelligentie
+      </h1>
+      <Paragraph>
+        Een App gemaakt voor de Iphone, voor het genereren van gepersonaliseerde
+        weekmenu's. Ontdek het Gemak van Maaltijdplanning met RecepAi Ben je het
+        beu om elke dag na te denken over wat je moet eten? RecepAi maakt
+        maaltijdplanning moeiteloos met behulp van kunstmatige intelligentie.
+        Laat je verrassen door gepersonaliseerde weekmenu's, samengesteld op
+        basis van jouw voorkeuren.
+      </Paragraph>
 
-<b></b>Accountinformatie: Als je een gebruikersaccount aanmaakt, verzamelen we je e-mailadres en wachtwoord om je in staat te stellen in te loggen en je recepten op te slaan.
+      <HeadingSmall>Hier enkele recepten:</HeadingSmall>
+      <Recommendations recommendations={props.recommendationsPart1} />
+      <AppBanner />
+      <AppVideo />
+      <HeadingSmall>Nog meer recepten:</HeadingSmall>
+      <Recommendations recommendations={props.recommendationsPart2} />
+      <HeadingSmall>Belangrijkste Kenmerken:</HeadingSmall>
 
-<b></b>Receptinformatie: We slaan de recepten op die je in de App creëert en bewaart.
+      <Paragraph>
+        Slimme Maaltijdplanning: Krijg suggesties voor heerlijke recepten
+        afgestemd op het aantal personen, keukencategorieën en
+        moeilijkheidsgraad.
+      </Paragraph>
 
-<b></b>Gebruiksgegevens: We verzamelen gegevens over hoe je de App gebruikt, zoals welke functies je gebruikt, de acties die je onderneemt, en de tijd die je besteedt aan de App.
-</p>
-<h2>Hoe we informatie gebruiken</h2>
-<p>
-We gebruiken de verzamelde informatie voor de volgende doeleinden:
+      <Paragraph>
+        Bewaar je Favorieten: RecepAi slaat al je favoriete recepten op, zodat
+        je ze altijd gemakkelijk kunt terugvinden.
+      </Paragraph>
 
-Om je in staat te stellen een gebruikersaccount aan te maken en in te loggen.
+      <Paragraph>
+        Ontdek Nieuwe Smaken: Duik in de "discover" modus en ontdek creaties van
+        andere gebruikers, en deel jouw culinaire meesterwerken.
+      </Paragraph>
 
-Om de door jou gecreëerde en opgeslagen recepten op te slaan en te beheren.
-
-Om de App te verbeteren en te optimaliseren, inclusief het begrijpen van hoe je de App gebruikt.
-
-Om je te voorzien van updates, meldingen en ondersteuning met betrekking tot de App.
-
-Delen van informatie
-
-We delen je informatie niet met derden, behalve in de volgende gevallen:
-
-Met je uitdrukkelijke toestemming.
-
-Indien vereist door de wet of om te voldoen aan juridische verzoeken.
-
-Jouw keuzes
-
-Je kunt op elk moment toegang krijgen tot, bijwerken of verwijderen van je accountinformatie door de instellingen in de App te gebruiken. Als je je account wilt verwijderen, neem dan contact met ons op via trystian.offerman@gmail.com en we zullen je verzoek verwerken.
-</p>
-
-
-<h2>Hoe we informatie gebruiken</h2>
-<p>
-Als je vragen hebt over dit privacybeleid, neem dan contact met ons op via trystian.offerman@gmail.com.
-
-Dit privacybeleid is voor het laatst bijgewerkt op 01-10-2023. We behouden ons het recht voor om dit privacybeleid op elk moment te wijzigen of bij te werken. Het is raadzaam om dit privacybeleid regelmatig te controleren voor eventuele wijzigingen.
-
-</p>
-
-      </section>
+      <Paragraph>
+        Voorkom Voedselverspilling: Maak gebruik van de unieke functie om
+        resterende ingrediënten te fotograferen en laat RecepAi een smakelijk
+        recept voor je genereren.
+      </Paragraph>
     </Layout>
   );
 }
 
-export async function getStaticProps() {
-  const allPostsData = getSortedPostsData();
+export const getServerSideProps = async (context) => {
+  const response = await fetch(
+    `https://whattoeat-cc0b1.ew.r.appspot.com/recommendations`
+  );
+  const { recommendations, tags } = await response.json();
+  console.log(recommendations.length);
+  const recommendationsPart1 = recommendations.splice(0, 30);
+  const recommendationsPart2 = recommendations.splice(30, 50);
+  const recommendationsPart4 = recommendations.splice(50, 80);
+
   return {
     props: {
-      allPostsData,
+      recommendations,
+      tags,
+      recommendationsPart1,
+      recommendationsPart2,
     },
   };
-}
+};
