@@ -29,7 +29,7 @@ export default function Layout({ children, home }) {
         <>
           <div
             className={css({
-              backgroundColor: "#e46358",
+              backgroundColor: "#f55a51",
               display: "flex",
               justifyContent: "flex-start",
               width: "100%",
