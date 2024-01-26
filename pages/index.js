@@ -75,7 +75,7 @@ export const AppBanner = () => {
 };
 
 const AppVideo = () => {
-  <video
+  return <video
     autoplay
     controls
     muted
@@ -112,11 +112,10 @@ export default function Page(props) {
       <HeadingSmall>Hier enkele recepten:</HeadingSmall>
       <Recommendations recommendations={props.recommendationsPart1} />
       <AppBanner />
-      <AppVideo />
       <HeadingSmall>Nog meer recepten:</HeadingSmall>
       <Recommendations recommendations={props.recommendationsPart2} />
       <HeadingSmall>Belangrijkste Kenmerken:</HeadingSmall>
-
+      <AppVideo />
       <Paragraph>
         Slimme Maaltijdplanning: Krijg suggesties voor heerlijke recepten
         afgestemd op het aantal personen, keukencategorieën en

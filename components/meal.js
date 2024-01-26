@@ -23,7 +23,7 @@ export const MealCard = ({ meal, standAlone = false }) => {
     <Link href={`/recept/${meal.name}`}>
       <div
         className={css({
-          width: standAlone ? "80%" : "300px",
+          width: standAlone ? "90%" : "300px",
           maxWidth: "1000px",
           marginLeft: standAlone ? "auto" : "inherit",
           marginRight: standAlone ? "auto" : "inherit",
@@ -35,8 +35,8 @@ export const MealCard = ({ meal, standAlone = false }) => {
         <img
           className={css({
             width: "100%",
-            height: "200px",
-            maxWidth: "300px",
+            height: standAlone ? "auto" : "200px",
+            maxWidth: '400px',
             borderTopRightRadius: "10px",
             borderTopLeftRadius: "10px",
           })}
