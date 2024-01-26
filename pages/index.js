@@ -81,7 +81,8 @@ const AppVideo = () => {
     muted
     autoPlay={true}
     className={css({
-      maxWidth: "400px",
+      width: "100%",
+      maxWidth: '400px'
     })}
   >
     <source src="/images/ingredients_recognizing.mp4" type="video/mp4" />
