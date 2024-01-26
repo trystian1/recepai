@@ -4,7 +4,7 @@ import { MealCard } from "../components/meal";
 import { HeadingSmall, Paragraph } from "../components/text";
 import { css } from "../styled-system/css";
 
-const Recommendations = ({ recommendations }) => {
+export const Recommendations = ({ recommendations }) => {
   return (
     <div
       className={css({
@@ -76,7 +76,6 @@ export const AppBanner = () => {
 
 const AppVideo = () => {
   return <video
-    autoplay
     controls
     muted
     autoPlay={true}

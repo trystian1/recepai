@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Layout from "../../../components/layout";
 import { MealCard } from "../../../components/meal";
 import { css } from "../../../styled-system/css";
-import { AppBanner } from "../..";
+import { AppBanner, Recommendations } from "../..";
 import { HeadingSmall, Paragraph } from "../../../components/text";
 
 const firebaseConfig = {
@@ -17,7 +17,7 @@ const firebaseConfig = {
 };
 const fireBaseApp = initializeApp(firebaseConfig);
 
-export default function Page(props) {
+export default function Page({recommendations, ...props}) {
   return (
     <Layout home>
       <div
@@ -29,6 +29,8 @@ export default function Page(props) {
         })}
       >
         <MealCard meal={props} standAlone={true} />
+        <HeadingSmall>Bekijk deze ook:</HeadingSmall>
+        <Recommendations recommendations={recommendations} />
         <TextSection />
       </div>
     </Layout>
@@ -105,8 +107,16 @@ export const getMeal = async (name) => {
 
 export const getServerSideProps = async (context) => {
   const { name } = context.params;
-  console.log(name);
+  let recommendationsToDisplay = []
+  const response = await fetch(`https://whattoeat-cc0b1.ew.r.appspot.com/recommendations-for-meal?mealName=${name}`);
+  console.log(response)
+  try { 
+    const { recommendations } = await response.json();
+    recommendationsToDisplay = recommendations.splice(0, 10)
+  } catch {
+    
+  }
   const res = await getMeal(name);
   console.log(res);
-  return { props: { ...res } };
+  return { props: { recommendations: recommendationsToDisplay, ...res } };
 };
