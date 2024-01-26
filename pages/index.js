@@ -11,7 +11,6 @@ const Recommendations = ({ recommendations }) => {
         display: "flex",
         justifyContent: "flex-start",
         gap: "5",
-        width: "100vw",
         overflow: "scroll",
       })}
     >
