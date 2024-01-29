@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { css } from "../styled-system/css";
 
 const SpecificationLine = ({ children }) => {
@@ -19,9 +20,35 @@ const SpecificationLine = ({ children }) => {
 };
 
 export const MealCard = ({ meal, standAlone = false }) => {
+  const ref = useRef();
+  const [isInView, setIsInView] = useState();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+
+        if (entry.isIntersecting) {
+          // Your logic here, e.g., load images, trigger animations, etc.
+          setIsInView(true);
+          observer.unobserve(entry.target);
+        };
+        
+      });
+    });
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [])
+
+
   return (
     <Link href={`/recept/${meal.name}`}>
       <div
+        ref={ref}
         className={css({
           width: standAlone ? "90%" : "300px",
           maxWidth: "1000px",
@@ -32,7 +59,7 @@ export const MealCard = ({ meal, standAlone = false }) => {
           height: standAlone ? "auto" : "500px",
         })}
       >
-        <img
+        {isInView && <img
           className={css({
             width: "100%",
             height: standAlone ? "auto" : "200px",
@@ -41,7 +68,7 @@ export const MealCard = ({ meal, standAlone = false }) => {
             borderTopLeftRadius: "10px",
           })}
           src={meal.image}
-        />
+        />}
         <div className={css({ padding: "10px" })} src={meal.image}>
           <h3
             className={css({
@@ -62,7 +89,7 @@ export const MealCard = ({ meal, standAlone = false }) => {
             {meal.calories.toLowerCase().includes("calo") ? "" : "Caloriëen:"}{" "}
             {meal.calories}
           </SpecificationLine>
-          <SpecificationLine>🏷️ {meal.tags.join(", ")}</SpecificationLine>
+          {meal.tags && <SpecificationLine>🏷️ {meal.tags.join(", ")}</SpecificationLine>}
           <SpecificationLine>👨‍👩‍👧‍👦 {meal.persons} Personen</SpecificationLine>
           {standAlone && meal.preparation.map((prep) => <p>{prep}</p>)}
         </div>

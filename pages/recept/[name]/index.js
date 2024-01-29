@@ -109,7 +109,7 @@ export const getServerSideProps = async (context) => {
   const { name } = context.params;
   let recommendationsToDisplay = []
   const response = await fetch(`https://whattoeat-cc0b1.ew.r.appspot.com/recommendations-for-meal?mealName=${name}`);
-  console.log(response)
+
   try { 
     const { recommendations } = await response.json();
     recommendationsToDisplay = recommendations.splice(0, 10)

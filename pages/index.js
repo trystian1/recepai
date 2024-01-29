@@ -143,7 +143,8 @@ export default function Page(props) {
 
 export const getServerSideProps = async (context) => {
   const response = await fetch(
-    `https://whattoeat-cc0b1.ew.r.appspot.com/recommendations`
+    //`http://localhost:8080/recommendations?userId=website`
+    `https://whattoeat-cc0b1.ew.r.appspot.com/recommendations?userId=website`
   );
   const { recommendations, tags } = await response.json();
   console.log(recommendations.length);
