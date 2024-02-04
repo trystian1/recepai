@@ -91,6 +91,7 @@ export const MealCard = ({ meal, standAlone = false }) => {
           </SpecificationLine>
           {meal.tags && <SpecificationLine>🏷️ {meal.tags.join(", ")}</SpecificationLine>}
           <SpecificationLine>👨‍👩‍👧‍👦 {meal.persons} Personen</SpecificationLine>
+          {standAlone && <div className={css({ marginBottom: '1em' })}>{meal.ingredients.map((ingredient) => <p>{`👜 ${ingredient}`}</p>)}</div>}
           {standAlone && meal.preparation.map((prep) => <p>{prep}</p>)}
         </div>
       </div>
